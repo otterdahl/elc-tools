@@ -99,17 +99,17 @@ int set(HANDLE fd, int baud, int timeout)
             break;
 	}
 
-	/* Enable the reciver and set local mode... */
+	/* Enable the receiver and set local mode... */
 	options.c_cflag |= (CLOCAL | CREAD);
 
 	/* Standard settings: 8-O-1 .... 7-E-1*/
-	options.c_cflag |= PARENB;	/* Enable parity bit */
-	/*options.c_cflag |= PARODD; */	/* Use odd parity insted of even */
-	options.c_cflag &= ~PARODD; 	/* Use odd parity insted of even */
-	options.c_cflag &= ~CSTOPB;	/* 1 stop bit */
-	options.c_cflag &= ~CSIZE;	/* Mask the character size bits */
-	/*options.c_cflag |= CS8;*/		/* Select 8 data bits */
-	options.c_cflag |= CS7;		/* Select 8 data bits */
+    options.c_cflag |= PARENB;	/* Enable parity bit */
+    /*options.c_cflag |= PARODD; */ /* Use odd parity instead of even */
+    options.c_cflag &= ~PARODD;     /* Use even parity instead of odd */
+    options.c_cflag &= ~CSTOPB;	/* 1 stop bit */
+    options.c_cflag &= ~CSIZE;	/* Mask the character size bits */
+    /*options.c_cflag |= CS8;*/		/* Select 8 data bits */
+    options.c_cflag |= CS7;		/* Select 7 data bits */
 
 	/* Enable Hardware flow control */
 	options.c_cflag |= CRTSCTS;	/* Also called CNEW_RTSCTS */

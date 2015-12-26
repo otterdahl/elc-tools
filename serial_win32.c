@@ -116,7 +116,7 @@ int set(HANDLE hComm, int baud)
 	int timeout=1;
 	readtimeout = 100;
 
-	/* Notice the diffrence between Connection Timeouts and Read Timeout
+	/* Notice the difference between Connection Timeouts and Read Timeout
 	   Maybe we should save and restore the communication settings
 	   upon start and exit */
 	COMMTIMEOUTS timeouts;

@@ -98,6 +98,9 @@ int set(HANDLE hComm, int baud)
 		case 7:
 			dcb.BaudRate = CBR_38400;
 			break;
+		case 8:
+			dcb.BaudRate = CBR_115200;
+			break;
 		default:
 			dcb.BaudRate = CBR_1200;
 	}

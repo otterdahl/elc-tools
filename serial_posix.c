@@ -60,22 +60,43 @@ int set(HANDLE fd, int baud, int timeout)
 	/* Get the current options for the port...  */
 	tcgetattr(fd, &options);
 
-	/* Set the baud rates */ 
-	if(baud == 0) {			/* 1200 baud */
-		cfsetispeed(&options, B1200);
-		cfsetospeed(&options, B1200);
-	}
-	else if(baud == 1) {	/* 2400 baud */
-		cfsetispeed(&options, B2400);
-		cfsetospeed(&options, B2400);
-	}
-	else if(baud == 4) {	/* 4800 baud */
-		cfsetispeed(&options, B4800);
-		cfsetospeed(&options, B4800);
-	}
-	else if(baud == 5) {	/* 9600 baud */
-		cfsetispeed(&options, B9600);
-		cfsetospeed(&options, B9600);
+    /* Set the baud rates */
+    switch(baud) {
+        case 0:
+            /* 1200 baud */
+            cfsetispeed(&options, B1200);
+            cfsetospeed(&options, B1200);
+            break;
+        case 1:
+            /* 2400 baud */
+            cfsetispeed(&options, B2400);
+            cfsetospeed(&options, B2400);
+            break;
+        case 4:
+            /* 4800 baud */
+            cfsetispeed(&options, B4800);
+            cfsetospeed(&options, B4800);
+            break;
+        case 5:
+            /* 9600 baud */
+            cfsetispeed(&options, B9600);
+            cfsetospeed(&options, B9600);
+            break;
+        case 6:
+            /* 19200 baud */
+            cfsetispeed(&options, B19200);
+            cfsetospeed(&options, B19200);
+            break;
+        case 7:
+            /* 38400 baud */
+            cfsetispeed(&options, B38400);
+            cfsetospeed(&options, B38400);
+            break;
+        case 8:
+            /* 115200 baud */
+		    cfsetispeed(&options, B115200);
+		    cfsetospeed(&options, B115200);
+            break;
 	}
 
 	/* Enable the reciver and set local mode... */

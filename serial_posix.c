@@ -94,8 +94,8 @@ int set(HANDLE fd, int baud, int timeout)
             break;
         case 8:
             /* 115200 baud */
-		    cfsetispeed(&options, B115200);
-		    cfsetospeed(&options, B115200);
+            cfsetispeed(&options, B115200);
+            cfsetospeed(&options, B115200);
             break;
 	}
 

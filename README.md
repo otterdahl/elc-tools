@@ -49,7 +49,7 @@ Serial port at 3f8: Write to reserved register, value 0x0, register 2
 	  on each line e.g. No controller found, osv..
 
 Terminating communication
-	- Sends 'æ'(230) to terminate (även '©'(169) has been seen)
+	- Sends 'Ã¦'(230) to terminate (Ã¤ven 'Â©'(169) has been seen)
 	2006-04-26: update: DEL (127), "y" 121, DEL 127 or 127, "?" 63, 127
 
 	Sends commands LOCK, LINEFEED, BAUD0
@@ -176,7 +176,7 @@ Controllers in this emergency route? >1> 5 (PBDP1)
            .
 ED Channels> 30 (BDP25)
 
-=head1 OPTIONS
+OPTIONS
 
 [r|w|t] read, write, test
 only read is supported yet

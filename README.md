@@ -22,15 +22,13 @@ CAVEATS
 
 Testing PARCOPY
 ---------------
-Run:
-mkfifo /tmp/elc3
+socat PTY,link=/dev/ttyS10 PTY,link=/dev/ttyS11
+
+ELC3SIM:
 elc3sim /tmp/elc3 dump.hex
 
 Then run parcopy separately:
 parcopy r /tmp/elc3
-
-To clean up:
-rm /tmp/elc3
 
 Additional comments about PARCOPY
 ---------------------------------
@@ -41,16 +39,14 @@ Establishing communication
 * Sends ascii ESC (27) & "s" (115) to establish communication
 * If no answer, sends ascii DEL (127) 3 times with 5 seconds interval
   Trying this in DosBox prints to following error:
-
-Serial port at 3f8: Write to reserved register, value 0x0, register 2
+  *Serial port at 3f8: Write to reserved register, value 0x0, register 2*
 * If still no answer, prints message nr 02, 03, 04 
   on each line e.g. No controller found, osv..
 
 Terminating communication
 * Sends 'æ'(230) to terminate (även '©'(169) has been seen)
   2006-04-26: update: DEL (127), "y" 121, DEL 127 or 127, "?" 63, 127
-
-*  Sends commands LOCK, LINEFEED, BAUD0
+* Sends commands LOCK, LINEFEED, BAUD0
 
 Initiated communications
 

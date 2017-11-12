@@ -3,75 +3,73 @@ elc-tools
 
 Perform memory dump of a ELC-3 traffic controller over RS232
 
-LICENCE
+Usage:
+parcopy [r|w|t] [port] [baud]
 
-	GPLv2
-
-SYNOPSIS
-
-	parcopy [r|w|t] [port] [baud]
 
 DESCRIPTION
+-----------
 
-
-	* only the 'r' function is supported yet. Used to perform memory dumps
-
-	* saves memory dump in 'dump.hex'
-
-	* don't forget to verify checksum! This can be done using the included 'checksum.pl'
+* only the 'r' function is supported yet. Used to perform memory dumps
+* saves memory dump in 'dump.hex'
+* don't forget to verify checksum! This can be done using the included 'checksum.pl'
 
 CAVEATS
+-------
 
-	* Doesn't have a built-in checksum control yet
+* Doesn't have a built-in checksum control yet
+* Seems to work with USB-based com-ports, but not with PC-card based ones
 
-	* Seems to work with USB-based com-ports, but not with PC-card based ones
+Testing PARCOPY
+---------------
+Run:
+mkfifo /tmp/elc3
+elc3sim /tmp/elc3 dump.hex
 
-HISTORY
+Then run parcopy separately:
+parcopy r /tmp/elc3
 
-	First version appered in July 2006
-
-AUTHOR
-
-	David Otterdahl <david.otterdahl@gmail.com>
-
+To clean up:
+rm /tmp/elc3
 
 Additional comments about PARCOPY
--------------------------
+---------------------------------
 
 Communication with ELC-2/3: Usually 1200 7-E-1 without hardware flow control
 
-Establising communication
-	- Sends ascii ESC (27) & "s" (115) to establish communication
-	- If no answer, sends ascii DEL (127) 3 times with 5 seconds interval
-	  Trying this in DosBox prints to following error:
+Establishing communication
+* Sends ascii ESC (27) & "s" (115) to establish communication
+* If no answer, sends ascii DEL (127) 3 times with 5 seconds interval
+  Trying this in DosBox prints to following error:
+
 Serial port at 3f8: Write to reserved register, value 0x0, register 2
-	- If still no answer, prints message nr 02, 03, 04 
-	  on each line e.g. No controller found, osv..
+* If still no answer, prints message nr 02, 03, 04 
+  on each line e.g. No controller found, osv..
 
 Terminating communication
-	- Sends 'æ'(230) to terminate (även '©'(169) has been seen)
-	2006-04-26: update: DEL (127), "y" 121, DEL 127 or 127, "?" 63, 127
+* Sends 'æ'(230) to terminate (även '©'(169) has been seen)
+  2006-04-26: update: DEL (127), "y" 121, DEL 127 or 127, "?" 63, 127
 
-	Sends commands LOCK, LINEFEED, BAUD0
+*  Sends commands LOCK, LINEFEED, BAUD0
 
 Initiated communications
-	parcopy defaults to 9660 baud. This baud rate can't be selected on the
-        command line. parcopy saves using the same settings as during
-        transmission
 
-	- if answer, parcopy sends BAUD
+parcopy defaults to 9660 baud. This baud rate can't be selected on the
+command line. parcopy saves using the same settings as during
+transmission
 
-	- sends ESC (27) och expects answer
-	- sends command "PARDUMPOUT" or "PARDUMPIN"
+- if answer, parcopy sends BAUD
+- sends ESC (27) och expects answer
+- sends command "PARDUMPOUT" or "PARDUMPIN"
 
 Closing communication
-	- when finished, sends ESC (27)
-	  - LOCK
-	  - LINEFEED
-	  - BAUD 0
+- when finished, sends ESC (27)
+- LOCK
+- LINEFEED
+ - BAUD 0
 
 Additional comments about PARASCII
--------------
+----------------------------------
 
 Similar to parcopy
 - ESC (27)
@@ -80,7 +78,7 @@ Similar to parcopy
 - BAUD4
 
 Command reference
-------------
+-----------------
 
 BAUDx: Change baud rate
 BAUD0: 1200 baud
@@ -99,7 +97,7 @@ CRTxx/TTYxx: Selects between printer type terminal and crt type terminal.
 STAT: Prints status info about the intersection, etc.
 
 ELC-2 Configuration - HOWTO
------------------------------
+---------------------------
 
 Fix 'Level locked' error (tested with ELC-3)
 LA
@@ -117,7 +115,7 @@ BP40=[plan]
 force plan
 
 How to prevent that all signal groups gets DIR=1 during simulation
--------------------------------------------------------
+------------------------------------------------------------------
 
 BP19=1 (timer mode)
 BP84=0 (ed channels)
@@ -131,14 +129,14 @@ DP3 Detektor input..
 D1P3=2-1-1 ... changed to D1P3=2-1-89
 
 Errors during transmission
-==============
+==========================
 Error in: GIP, NCP, WCP, PCP
 "Syntax error" "Only in configuration", "Wrong type"
 Fix GIP and NCP by hand.
 Bugs in ELC-TOOL? Wrong version? (Card 2.47)
 
 Configuration
-================
+=============
 16 char name> FAGELBACKSG.
 CDate> 93-9-30 (BDP1)
 Conftime> 12-0 (BDP2)
@@ -175,12 +173,3 @@ No of em routes?> 5 (BDP24)
 Controllers in this emergency route? >1> 5 (PBDP1)
            .
 ED Channels> 30 (BDP25)
-
-OPTIONS
-
-[r|w|t] read, write, test
-only read is supported yet
-
-[baud]
-Optional, force usage of specific baud rate
-

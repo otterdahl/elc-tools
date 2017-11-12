@@ -110,7 +110,7 @@ int readport(int fd, FILE *fp)
 }
 
 /* elcf: elc functions
- * BAUDx: Byt hastighet
+ * BAUDx: change baud rate
  * BAUD0: 1200 baud
  * BAUD1: 2400 baud
  * BAUD2: 300 baud

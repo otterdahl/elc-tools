@@ -103,21 +103,20 @@ int terminal(HANDLE fd) {
 	char c[] = {0,0};
 	int size;
 	char buffer[1024];
-	char *bufptr;
 	int i;
 	while(c[0] != EOF) {
-		while ((c[0] = getchar()) != '\n')
-			writeport(fd,c);
-		sleep(SECOND);
-		while((size=read(fd, bufptr, buffer + sizeof(buffer) - bufptr - 1)) > 0) {
-			printf("%d new characters to be printed\n",size);
+		/* Write to port */
+		c[0] = getchar();
+		writeport(fd, c);
+
+		/* Read from port */
+		while((size=read(fd, buffer, sizeof(buffer)) > 0)) {
 			for(i=0; i < size; i++) {
-				printf("%c",bufptr[i]);
+				printf("%c", buffer[i]);
 			}
 		}
 	}
 	printf("Exiting Terminal mode\n");
-	//printf("Terminal mode is not finished.\n");
 	return 0;
 }
 

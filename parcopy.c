@@ -9,7 +9,7 @@
 #else /* Posix */
 #define	HANDLE	int
 #define INVALID_HANDLE_VALUE -1
-#define	SECOND		1
+#define	SECOND		2
 #include <string.h>	/* String function definitions */
 #include <unistd.h>	/* UNIX standard function definitions */
 #include <fcntl.h>	/* File control definitions */
@@ -98,8 +98,8 @@ int terminal(HANDLE fd) {
 	 * <whatever the user types>
 	 * <cleanup>
 	 */
-	/*
-	printf("Entering Terminal mode. Use the EOF signal to exit. (Usually <ctrl>-Z)\n");
+	
+	printf("Entering Terminal mode. Use the EOF signal to exit. (Usually <ctrl>-D)\n");
 	char c[] = {0,0};
 	int size;
 	char buffer[1024];
@@ -117,11 +117,9 @@ int terminal(HANDLE fd) {
 		}
 	}
 	printf("Exiting Terminal mode\n");
-	*/
-	printf("Terminal mode is not finished.\n");
+	//printf("Terminal mode is not finished.\n");
 	return 0;
 }
-
 
 int init(int speed, HANDLE fd) {
 	/* Initiate communications
@@ -265,7 +263,7 @@ int cleanup(HANDLE fd) {
 	return 0;
 }
 
-/* The speed setting paramater differs from the original implementation */
+/* The speed setting parameter differs from the original implementation */
 int main(int argc, char* argv[]) {
 	HANDLE fd;
 	int mode;

@@ -48,7 +48,7 @@ http://www.scienceprog.com/shelling-the-intel-8-bit-hex-file-format/
 
 =head1 HISTORY
 
-First version appered in February 2008
+First version appeared in February 2008
 
 =head1 AUTHOR
 
